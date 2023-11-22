@@ -52,7 +52,7 @@ namespace nooshop.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("Laptop");
+                    b.ToTable("Laptops");
                 });
 
             modelBuilder.Entity("nooshop.Models.Sell", b =>
@@ -88,16 +88,13 @@ namespace nooshop.Migrations
 
                     b.HasKey("sellId");
 
-                    b.ToTable("Sell");
+                    b.ToTable("Sells");
                 });
 
             modelBuilder.Entity("nooshop.Models.Shop", b =>
                 {
-                    b.Property<int>("SellerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SellerId"));
+                    b.Property<string>("sellerCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -116,9 +113,9 @@ namespace nooshop.Migrations
                         .IsRequired()
                         .HasColumnType("float");
 
-                    b.HasKey("SellerId");
+                    b.HasKey("sellerCode");
 
-                    b.ToTable("Shop");
+                    b.ToTable("Shops");
                 });
 
             modelBuilder.Entity("nooshop.Models.SmartPhone", b =>
@@ -152,7 +149,7 @@ namespace nooshop.Migrations
 
                     b.HasKey("ProductID");
 
-                    b.ToTable("SmartPhone");
+                    b.ToTable("SmartPhones");
                 });
 
             modelBuilder.Entity("nooshop.Models.User", b =>
@@ -181,7 +178,7 @@ namespace nooshop.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

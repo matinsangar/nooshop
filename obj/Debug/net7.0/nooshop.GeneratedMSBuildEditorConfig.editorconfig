@@ -16,10 +16,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/macbookair/nooshop/nooshop/nooshop
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/macbookair/nooshop/nooshop/nooshop/Pages/ShopContorller/shopSignUp.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hvcENvbnRvcmxsZXIvc2hvcFNpZ25VcC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/Users/macbookair/nooshop/nooshop/nooshop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,6 +30,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/macbookair/nooshop/nooshop/nooshop/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbookair/nooshop/nooshop/nooshop/Views/Shop/AllShops.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvcC9BbGxTaG9wcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbookair/nooshop/nooshop/nooshop/Views/Shop/shopSignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvcC9zaG9wU2lnblVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbookair/nooshop/nooshop/nooshop/Views/User/UserSignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Vc2VyU2lnblVwLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/macbookair/nooshop/nooshop/nooshop/Views/_ViewImports.cshtml]

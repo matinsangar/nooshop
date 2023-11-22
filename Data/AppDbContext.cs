@@ -11,14 +11,16 @@ public class AppDbContext : DbContext
     {
     }
 
-    public System.Data.Entity.DbSet<User> Users { get; set; }
-    public System.Data.Entity.DbSet<Shop> Shops { get; set; }
-    public System.Data.Entity.DbSet<Laptop> Laptops { get; set; }
-    public System.Data.Entity.DbSet<SmartPhone> SmartPhones { get; set; }
+
+    public DbSet<Shop> Shops { get; set; }
+    public DbSet<Laptop> Laptops { get; set; }
+    public DbSet<SmartPhone> SmartPhones { get; set; }
+    public DbSet<Sell> Sells { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Shop>().HasKey(s => s.SellerId);
+        modelBuilder.Entity<Shop>().HasKey(s => s.sellerCode);
         modelBuilder.Entity<Shop>()
             .Property(s => s.ShopName)
             .IsRequired()
@@ -28,6 +30,9 @@ public class AppDbContext : DbContext
             .IsRequired();
         modelBuilder.Entity<Shop>()
             .Property(s => s.TotalSell)
+            .IsRequired();
+        modelBuilder.Entity<Shop>()
+            .Property(s => s.sellerCode)
             .IsRequired();
 
 
@@ -82,7 +87,6 @@ public class AppDbContext : DbContext
             .IsRequired();
 
 
-        
         modelBuilder.Entity<Sell>().HasKey(s => s.sellId);
         modelBuilder.Entity<Sell>()
             .Property(s => s.ProductID)
@@ -110,6 +114,5 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Sell>()
             .Property(s => s.DateTime)
             .IsRequired();
-        base.OnModelCreating(modelBuilder);
     }
 }
