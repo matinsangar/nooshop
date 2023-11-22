@@ -27,12 +27,6 @@ public class AppDbContext : DbContext
             .Property(s => s.Password)
             .IsRequired();
         modelBuilder.Entity<Shop>()
-            .Property(s => s.ProvidedPhones)
-            .IsRequired();
-        modelBuilder.Entity<Shop>()
-            .Property(s => s.ProvidedLapTops)
-            .IsRequired();
-        modelBuilder.Entity<Shop>()
             .Property(s => s.TotalSell)
             .IsRequired();
 
@@ -47,9 +41,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<User>()
             .Property(u => u.Credit)
             .IsRequired();
-        modelBuilder.Entity<User>()
-            .Property(u => u.SellRecords)
-            .IsRequired();
 
 
         modelBuilder.Entity<Laptop>().HasKey(l => l.ProductID);
@@ -60,6 +51,9 @@ public class AppDbContext : DbContext
             .Property(l => l.Price);
         modelBuilder.Entity<Laptop>()
             .Property(l => l.AvaiableCount)
+            .IsRequired();
+        modelBuilder.Entity<Laptop>()
+            .Property(l => l.ShopProvider)
             .IsRequired();
         modelBuilder.Entity<Laptop>()
             .Property(l => l.Model)
@@ -83,8 +77,39 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<SmartPhone>()
             .Property(s => s.AvaiableCount)
             .IsRequired();
+        modelBuilder.Entity<SmartPhone>()
+            .Property(s => s.ShopProvider)
+            .IsRequired();
 
 
+        
+        modelBuilder.Entity<Sell>().HasKey(s => s.sellId);
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.ProductID)
+            .IsRequired();
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.ShopName)
+            .IsRequired();
+
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.ClientName)
+            .IsRequired();
+
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.Count)
+            .IsRequired();
+
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.Price)
+            .IsRequired();
+
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.IsValid)
+            .IsRequired();
+
+        modelBuilder.Entity<Sell>()
+            .Property(s => s.DateTime)
+            .IsRequired();
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -14,4 +14,5 @@ public class SmartPhone
     public int? AvaiableCount { get; set; } = 0;
     public int ProductID { get; set; }
     public Brands Brand { get; set; }
+    public string ShopProvider { get; set; }
 }

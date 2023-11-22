@@ -16,4 +16,5 @@ public class Laptop
     public int? AvaiableCount { get; set; } = 0;
     public Models Model { get; set; }
     public int ProductID { get; set; }
+    public string ShopProvider { get; set; }
 }

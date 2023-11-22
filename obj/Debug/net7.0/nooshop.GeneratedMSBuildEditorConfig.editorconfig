@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/macbookair/nooshop/nooshop/nooshop
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/macbookair/nooshop/nooshop/nooshop/Pages/ShopContorller/shopSignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hvcENvbnRvcmxsZXIvc2hvcFNpZ25VcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/macbookair/nooshop/nooshop/nooshop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
