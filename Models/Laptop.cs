@@ -5,7 +5,8 @@ public enum Models
     Apple,
     Acer,
     Hp,
-    Asuz
+    Asuz,
+    etc
 }
 
 public class Laptop

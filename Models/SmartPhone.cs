@@ -1,10 +1,11 @@
 namespace nooshop.Models;
-public enum Brand
+public enum Brands
 {
     Apple,
     Samsung,
     Xiaomi,
-    BlackBerry
+    BlackBerry,
+    etc
 }
 public class SmartPhone
 {
@@ -12,5 +13,5 @@ public class SmartPhone
     public double? Price { get; set; } = 0;
     public int? AvaiableCount { get; set; } = 0;
     public int ProductID { get; set; }
-    public Brand Brand { get; set; }
+    public Brands Brand { get; set; }
 }
