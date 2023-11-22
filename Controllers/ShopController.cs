@@ -21,10 +21,14 @@ public class ShopController : Controller
         return View();
     }
 
+    public IActionResult shopLogin()
+    {
+        return View();
+    }
+
     [HttpPost]
     public IActionResult AddNewShop(Shop shop)
     {
-
         if (shop == null)
         {
             _logger.LogError("Shop object is null.");
@@ -33,23 +37,36 @@ public class ShopController : Controller
 
         if (ModelState.IsValid)
         {
-            Console.WriteLine(shop.Email);
-            Console.WriteLine(shop.ShopName);
-            Console.WriteLine(shop.Password);
-            // Console.WriteLine(shop.SellerId);
-            Console.WriteLine(shop.TotalSell);
             _DbContext.Shops.Add(shop);
             _DbContext.SaveChanges();
-            return View("shopSignUp");
+            return View("AllShops");
         }
 
         _logger.LogError("ModelState is not valid.");
         return View("shopSignUp");
     }
 
+
+    [HttpPost]
+    public async Task<IActionResult> shopLogin(Shop shop)
+    {
+        var isLoginValid = await _DbContext.VerifyShopLogin(shop);
+        if (isLoginValid)
+        {
+            return RedirectToAction("ShopLoginSuccess");
+        }
+
+        return RedirectToAction("shopLogin");
+    }
+
     public IActionResult AllShops()
     {
         var shops = _DbContext.Shops.ToList();
         return View(shops);
+    }
+
+    public IActionResult ShopLoginSuccess()
+    {
+        return View();
     }
 }

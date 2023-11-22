@@ -3,25 +3,27 @@
 @{
     ViewData["Title"] = "List of Coaches";
 }
-<div class="container">
-    <h2>List of Coaches</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Name</th>
-            @* <th>ID</th> *@
-            <th>Totall sell</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var shop in Model)
-        {
-            <tr>
-                <td>@shop.ShopName</td>
-                @* <td>@shop.SellerId</td> *@
-                <td>@shop.TotalSell</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-</div>
+@* <div class="container"> *@
+@*     <h2>List of Coaches</h2> *@
+@*     <table class="table table-striped"> *@
+@*         <thead> *@
+@*         <tr> *@
+@*             <th>Name</th> *@
+@*             $1$ <th>ID</th> #1# *@
+@*             <th>Totall sell</th> *@
+@*         </tr> *@
+@*         </thead> *@
+@*         <tbody> *@
+@*         @foreach (var shop in Model) *@
+@*         { *@
+@*             <tr> *@
+@*                 <td>@shop.ShopName</td> *@
+@*                 $1$ <td>@shop.SellerId</td> #1# *@
+@*                 <td>@shop.TotalSell</td> *@
+@*             </tr> *@
+@*         } *@
+@*         </tbody> *@
+@*     </table> *@
+@* </div> *@
+
+<h2>hello</h2>

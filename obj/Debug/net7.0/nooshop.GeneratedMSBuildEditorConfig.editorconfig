@@ -36,6 +36,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvcC9BbGxTaG9wcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/macbookair/nooshop/nooshop/nooshop/Views/Shop/shopLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvcC9zaG9wTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/macbookair/nooshop/nooshop/nooshop/Views/Shop/ShopLoginSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvcC9TaG9wTG9naW5TdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/macbookair/nooshop/nooshop/nooshop/Views/Shop/shopSignUp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hvcC9zaG9wU2lnblVwLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

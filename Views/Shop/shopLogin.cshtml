@@ -1,0 +1,26 @@
+@model nooshop.Models.Shop
+@{
+    ViewData["Title"] = "Shop Login";
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+<div class="centered-container">
+    <div class="form-container">
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger">@errorMessage</div>
+        }
+        <h2>Login</h2>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="ShopName">Username</label>
+                <input type="text" asp-for="ShopName" class="form-control" id="inputUsername" placeholder="Username"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input type="password" asp-for="Password" class="form-control" id="inputPassword" placeholder="Password"/>
+            </div>
+            <button type="submit" class="btn btn-primary click-btn " style="padding-top: 15px; margin-top: 20px">Submit</button>
+        </form>
+    </div>
+</div>
