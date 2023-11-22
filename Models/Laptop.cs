@@ -1,0 +1,18 @@
+namespace nooshop.Models;
+
+public enum Models
+{
+    Apple,
+    Acer,
+    Hp,
+    Asuz
+}
+
+public class Laptop
+{
+    public string? Name { get; set; }
+    public double? Price { get; set; } = 0;
+    public int? AvaiableCount { get; set; } = 0;
+    public Models Model { get; set; }
+    public int ProductID { get; set; }
+}
