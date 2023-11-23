@@ -135,4 +135,35 @@ public class AppDbContext : DbContext
             throw;
         }
     }
+
+    public async Task<bool> VerifyUserLogin(User user)
+    {
+        try
+        {
+            var getUser = await Users.FirstOrDefaultAsync(u => u.Username == user.Username);
+            if (getUser != null && user.Password == getUser.Password)
+            {
+                return true;
+            }
+
+            Console.WriteLine("Wrong information for shoop login...");
+            return false;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    public async Task<double> getUserCredit(string savedName)
+    {
+        var user = await Users.FirstOrDefaultAsync(u => u.Username == savedName);
+        if (user != null)
+        {
+            return user.Credit;
+        }
+
+        return 0;
+    }
 }
