@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity;
 using nooshop.Models;
 using nooshop.Data;
+using nooshop.Controllers;
 
 namespace nooshop.Controllers;
 
@@ -9,7 +10,6 @@ public class ShopController : Controller
 {
     private readonly ILogger<ShopController> _logger;
     private readonly AppDbContext _DbContext;
-
     public ShopController(AppDbContext dbContext, ILogger<ShopController> logger)
     {
         _DbContext = dbContext;

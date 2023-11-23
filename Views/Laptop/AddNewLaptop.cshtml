@@ -1,0 +1,41 @@
+@model nooshop.Models.Laptop
+<div class="centered-container">
+    <div class="form-container">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" class="form-control" required/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductID">Proudct code</label>
+                <input asp-for="ProductID" class="form-control" required/>
+                <span asp-validation-for="ProductID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Model">Field</label>
+                <select asp-for="Model"
+                        asp-items="Html.GetEnumSelectList<nooshop.Models.Models>()"
+                        class="form-control">
+                    <option value="">-- Select Field --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Price</label>
+                <input asp-for="Price" class="form-control" required/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvaiableCount">Count</label>
+                <input asp-for="AvaiableCount" class="form-control" required/>
+                <span asp-validation-for="AvaiableCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShopProvider">ProviderID:</label>
+                <input asp-for="ShopProvider" class="form-control" required/>
+                <span asp-validation-for="ShopProvider" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary click-btn">Add Pill</button>
+        </form>
+    </div>
+</div>

@@ -24,11 +24,8 @@ namespace nooshop.Migrations
 
             modelBuilder.Entity("nooshop.Models.Laptop", b =>
                 {
-                    b.Property<int>("ProductID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
+                    b.Property<string>("ProductID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("AvaiableCount")
                         .IsRequired()
