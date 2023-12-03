@@ -1,4 +1,4 @@
-@model nooshop.Models.Laptop
+@model nooshop.Models.SmartPhone
 <div class="centered-container">
     <div class="form-container">
         <form method="post">
@@ -13,8 +13,8 @@
                 <span asp-validation-for="ProductID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model">Field</label>
-                <select asp-for="Model"
+                <label asp-for="Brand">Field</label>
+                <select asp-for="Brand"
                         asp-items="Html.GetEnumSelectList<nooshop.Models.Models>()"
                         class="form-control">
                     <option value="">-- Select Field --</option>

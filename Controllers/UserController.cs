@@ -66,6 +66,7 @@ public class UserController : Controller
     public async Task<IActionResult> UserPanel()
     {
         var userCredit = await _DbContext.getUserCredit(savedName);
+        savedTotalAmount = userCredit;
         var viewModel = new UserPanelViewModel
         {
             Credit = userCredit
