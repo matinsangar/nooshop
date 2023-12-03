@@ -1,25 +1,26 @@
 @model IEnumerable<nooshop.Models.Laptop>
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+    ViewBag.Title = "All laptops";
 }
 
 <h2>ALL laptops will be here</h2>
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Brand</th>
-        <th>Model</th>
-    </tr>
-
-    @foreach (var laptop in Model)
-    {
+<div class="container mt-4">
+    <table class="table table-bordered table-responsive green-table table-striped">
         <tr>
-            <td>@laptop.ProductID</td>
-            <td>@laptop.Model</td>
-            <td>@laptop.Name</td>
+            <th>ID</th>
+            <th>Brand</th>
+            <th>Model</th>
         </tr>
-    }
-</table>
+
+        @foreach (var laptop in Model)
+        {
+            <tr>
+                <td>@laptop.ProductID</td>
+                <td>@laptop.Model</td>
+                <td>@laptop.Name</td>
+            </tr>
+        }
+    </table>
+</div>
