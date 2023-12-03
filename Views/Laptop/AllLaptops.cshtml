@@ -1,4 +1,4 @@
-@model nooshop.Models.Laptop
+@model IEnumerable<nooshop.Models.Laptop>
 
 @{
     ViewBag.Title = "title";
@@ -6,3 +6,20 @@
 }
 
 <h2>ALL laptops will be here</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+    </tr>
+
+    @foreach (var laptop in Model)
+    {
+        <tr>
+            <td>@laptop.ProductID</td>
+            <td>@laptop.Model</td>
+            <td>@laptop.Name</td>
+        </tr>
+    }
+</table>
