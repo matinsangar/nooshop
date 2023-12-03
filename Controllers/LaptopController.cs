@@ -40,4 +40,28 @@ public class LaptopController : Controller
         _logger.LogError("ModelState is not valid.");
         return View("AddNewLaptop");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> BuyLaptop(string productId, double price, int count, string shopName,
+        string clientName, bool isValid,
+        string sellId, DateTime dateTime)
+    {
+        var user = await _DbContext.Users.FirstOrDefaultAsync(u => u.Username == clientName);
+        var shop = await _DbContext.Shops.FirstOrDefaultAsync(s => s.ShopName == shopName);
+        if (user != null && shop != null)
+        {
+            var sell = new Sell(productId, price, count, shopName, clientName, isValid, sellId, dateTime);
+            await _DbContext.Sells.AddAsync(sell);
+            await _DbContext.SaveChangesAsync();
+            return Json(new { success = true });
+        }
+
+        return Json(new { success = false, message = "User not found." });
+    }
+
+    public IActionResult AllLaptops()
+    {
+        var laptops = _DbContext.Laptops.ToList();
+        return View(laptops);
+    }
 }

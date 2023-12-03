@@ -1,7 +1,7 @@
 @model nooshop.Models.User
 
 @{
-    ViewData["Title"] = "Add new Shop";
+    ViewData["Title"] = "Add new User";
     var errorMessage = TempData["ErrorMessage"] as string;
 }
 
@@ -12,8 +12,8 @@
         {
             <div class="alert alert-danger">@errorMessage</div>
         }
-        <h2>Register new Shop</h2>
-        <form method="post" asp-action="">
+        <h2>Register</h2>
+        <form method="post" asp-action="AddNewUser">
             <div class="form-group">
                 <label asp-for="Username">Name</label>
                 <input asp-for="Username" type="text" class="form-control" placeholder="Username "/>
@@ -29,10 +29,6 @@
             <div class="form-group">
                 <label asp-for="UserID">User ID</label>
                 <input asp-for="UserID" type="text" class="form-control" placeholder="User ID "/>
-            </div>
-            <div class="form-group">
-                <label asp-for="Credit">User ID</label>
-                <input asp-for="Credit" type="text" class="form-control" placeholder="Credit "/>
             </div>
 
 
