@@ -1,96 +1,25 @@
 @model List<SmartPhone>
-
 @{
-    ViewData["Title"] = "All Pills";
+    ViewBag.Title = "All smartPhones";
 }
-<body class="displayAllPill">
 
-    <h2 class="text-center mt-4">All Pills</h2>
+<h2>ALL laptops will be here</h2>
 
-    <div class="container mt-4">
-        <div class="row each-pill">
-            @foreach (var smartPhone in Model)
-            {
-                <input type="hidden" id="userId" value="@User.Identity.Name"/>
+<div class="container mt-4">
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Brand</th>
+            <th>Model</th>
+        </tr>
 
-                        <div class="card-body">
-                            <h5 class="card-title">@smartPhone.Name</h5>
-                            <p class="card-text">Price: @smartPhone.Price $</p>
-                            <p class="card-text">AVB count: <span class="available-count">@smartPhone.AvaiableCount</span></p>
-                            <p class="card-text">provider @smartPhone.ShopProvider</p>
-                            <p class="card-text">Brand: @smartPhone.Brand</p>
-                        </div>
-
-                        <div class="card-footer d-flex justify-content-between">
-                            <button class="btn btn-outline-pink add-to-favorites"
-                                    onclick="addToFavorites('@smartPhone.Name', '@User.Identity.Name')"
-                                    data-product="@smartPhone.Name">
-                                <i class="fas fa-heart"></i> Fav ♡
-                            </button>
-                            @* Buy SmartPhone❤ *@
-                            <div class="count-section">
-                                <input type="number" class="form-control count-input new_input" placeholder="تعداد را وارد کنید"/>
-                                <button class="btn btn-outline-green" onclick="buyPhone(this,'@smartPhone.Name', '@smartPhone.Price')">
-                                    <i class="fas fa-shopping-cart"></i> 🛒
-                                </button>
-                            </div>
-                        </div>
-            }
-        </div>
-    </div>
-</body>
-<script>
-     
-    function addToFavorites(productName, userName) {
-            console.log("Adding product to favorites...");
-        $.ajax({
-            type: "POST",
-            url: "/Account/AddToFavorites",
-            data: { productName: productName, userName: userName }, 
-            dataType: "json",
-            success: function (result) {
-                if (result.success) {
-                    alert("Product added to favorites!");
-                } else {
-                    alert("Failed to add product to favorites.");
-                }
-            },
-            error: function () {
-                alert("An error occurred while adding the product to favorites.");
-            }
-        });
-    }
-     function buyPhone(button,productName, productPrice) {
-
-             var userName = $(button).closest('.card').find('.user-id').val();
-             var count = $(button).closest('.card').find('.count-input').val();
-             var countInt = parseInt(count);
-             var availableCount = parseInt($(button).closest('.card').find('.available-count').text().trim());
-
-               if (isNaN(countInt) || countInt <= 0 || countInt > availableCount) {
-                    alert("Please enter a valid count within the available limit.");
-                    return; 
-               }
-
-            console.log("Buying product...");
-            console.log("Count value: " + count);
-            console.log("AVB count is : " + availableCount);
-            $.ajax({
-                type: "POST",
-                url: "/Account/BuyPill",
-                data: { productName: productName, userName: userName, count: count, productPrice: productPrice },
-                dataType: "json",
-                success: function (result) {
-                    if (result.success) {
-                        alert("Product added to cart!");
-                    } else {
-                        alert("Failed to add product to cart.");
-                    }
-                },
-                error: function () {
-                    alert("An error occurred while adding the product to cart.");
-                }
-            });
+        @foreach (var smartPhone in Model)
+        {
+            <tr>
+                <td>@smartPhone.ProductID</td>
+                <td>@smartPhone.Brand</td>
+                <td>@smartPhone.Name</td>
+            </tr>
         }
-    
-</script>
+    </table>
+</div>

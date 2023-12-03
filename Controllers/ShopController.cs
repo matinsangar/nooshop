@@ -54,7 +54,6 @@ public class ShopController : Controller
         var isLoginValid = await _DbContext.VerifyShopLogin(shop);
         if (isLoginValid)
         {
-            // return RedirectToAction("ShopLoginSuccess");
             return View("ShopPanel");
         }
 

@@ -1,31 +1,31 @@
-@model IEnumerable<nooshop.Models.Laptop>
+@model IEnumerable<nooshop.Models.SmartPhone>
 
 @{
-    ViewData["Title"] = "All Laptops";
+    ViewData["Title"] = "All Phones";
 }
 
 <body>
-    <h2 class="text-center mt-4">All Laptops</h2>
+    <h2 class="text-center mt-4">All Phones</h2>
 
     <div class="container mt-4">
         <div class="row each-pill">
-            @foreach (var laptop in Model)
+            @foreach (var smartPhone in Model)
             {
-                if (laptop != null)
+                if (smartPhone != null)
                 {
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">@laptop.Name</h5>
-                            <p class="card-text">Price: @laptop.Price $</p>
-                            <p class="card-text">AVB count: <span class="available-count">@laptop.AvaiableCount</span></p>
-                            <p class="card-text">Provider: @laptop.ShopProvider</p>
-                            <p class="card-text">Brand: @laptop.Model</p>
+                            <h5 class="card-title">@smartPhone.Name</h5>
+                            <p class="card-text">Price: @smartPhone.Price $</p>
+                            <p class="card-text">AVB count: <span class="available-count">@smartPhone.AvaiableCount</span></p>
+                            <p class="card-text">Provider: @smartPhone.ShopProvider</p>
+                            <p class="card-text">Brand: @smartPhone.Brand</p>
                         </div>
 
                         <div class="card-footer d-flex justify-content-between">
                             <div class="count-section">
                                 <input type="number" class="form-control count-input" placeholder="Enter count" />
-                                <button class="btn btn-outline-green" onclick="buyLaptop('@laptop.ProductID', '@laptop.Price')">
+                                <button class="btn btn-outline-green" onclick="buyPhone('@smartPhone.ProductID', '@smartPhone.Price')">
                                     <i class="fas fa-shopping-cart"></i> 🛒 Buy
                                 </button>
                             </div>
@@ -37,7 +37,7 @@
     </div>
 
     <script>
-        function buyLaptop(productId, productPrice) {
+        function buyPhone(productId, productPrice) {
             var card = $(event.target).closest('.card');
             var countInput = card.find('.count-input');
             var count = countInput.val();
@@ -55,18 +55,18 @@
 
             $.ajax({
                 type: "POST",
-                url: "/User/BuyLaptop/",
+                url: "/User/BuyPhone/",
                 data: { productId: productId, productPrice: productPrice, count: count },
                 dataType: "json",
                 success: function (result) {
                     if (result && result.success) {
-                        alert("Laptop sold successfully!");
+                        alert("Phone sold successfully!");
                     } else {
-                        alert("Failed to sell laptop: " + (result ? result.message : "Unknown error"));
+                        alert("Failed to sell Phone: " + (result ? result.message : "Unknown error"));
                     }
                 },
                 error: function () {
-                    alert("An error occurred while selling the laptop.");
+                    alert("An error occurred while selling the Phone.");
                 }
             });
         }

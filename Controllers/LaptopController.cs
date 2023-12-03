@@ -34,7 +34,7 @@ public class LaptopController : Controller
         {
             _DbContext.Laptops.Add(laptop);
             await _DbContext.SaveChangesAsync();
-            return View("AllLaptops");
+            return RedirectToAction("AllLaptops");
         }
 
         _logger.LogError("ModelState is not valid.");

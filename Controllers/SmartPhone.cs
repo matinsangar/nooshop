@@ -34,10 +34,23 @@ public class SmartPhoneController : Controller
         {
             _DbContext.SmartPhones.Add(smartPhone);
             await _DbContext.SaveChangesAsync();
-            return View("AllPhones");
+            return RedirectToAction("AllPhones");
         }
 
         _logger.LogError("ModelState is not valid.");
         return View("AddNewPhone");
+    }
+
+    public IActionResult AllPhones()
+    {
+        var phones = _DbContext.SmartPhones.ToList();
+        return View(phones);
+    }
+
+    [HttpGet]
+    public IActionResult DisplayAllPhones()
+    {
+        var smartPhones = _DbContext.SmartPhones.ToList();
+        return View(smartPhones);
     }
 }
