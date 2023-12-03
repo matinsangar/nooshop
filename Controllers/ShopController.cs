@@ -10,6 +10,7 @@ public class ShopController : Controller
 {
     private readonly ILogger<ShopController> _logger;
     private readonly AppDbContext _DbContext;
+
     public ShopController(AppDbContext dbContext, ILogger<ShopController> logger)
     {
         _DbContext = dbContext;
@@ -53,7 +54,8 @@ public class ShopController : Controller
         var isLoginValid = await _DbContext.VerifyShopLogin(shop);
         if (isLoginValid)
         {
-            return RedirectToAction("ShopLoginSuccess");
+            // return RedirectToAction("ShopLoginSuccess");
+            return View("ShopPanel");
         }
 
         return RedirectToAction("shopLogin");

@@ -1,0 +1,19 @@
+@using nooshop.Controllers
+
+@{
+    ViewData["Title"] = "Shop panel";
+}
+
+<div class="centered-container">
+    <h1>Welcome!</h1>
+    <div class="content">
+        <h2 style="color: #1a1e21">حساب کاربری شما</h2>
+
+        <div class="btn btn-info btn-container">
+            <a href="@Url.Action("AddNewLaptop", "Laptop")" class="btn btn-pink blurred-btn">add new laptop</a>
+        </div>
+        <div class="btn btn-info btn-container">
+            <a href="@Url.Action("AddNewPhone", "SmartPhone")" class="btn btn-pink blurred-btn">add new Phone</a>
+        </div>
+    </div>
+</div>
