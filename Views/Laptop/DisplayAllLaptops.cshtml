@@ -1,0 +1,78 @@
+@model IEnumerable<nooshop.Models.Laptop>
+
+@{
+    ViewData["Title"] = "All Laptops";
+}
+
+<body>
+    <h2 class="text-center mt-4">All Laptops</h2>
+
+    <div class="container mt-4">
+        <div class="row each-pill">
+            @foreach (var laptop in Model)
+            {
+                if (laptop != null)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@laptop.Name</h5>
+                            <p class="card-text">Price: @laptop.Price $</p>
+                            <p class="card-text">AVB count: <span class="available-count">@laptop.AvaiableCount</span></p>
+                            <p class="card-text">Provider: @laptop.ShopProvider</p>
+                            <p class="card-text">Brand: @laptop.Model</p>
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-between">
+                            <div class="count-section">
+                                <input type="number" class="form-control count-input" placeholder="Enter count" />
+                                <button class="btn btn-outline-green" onclick="buyLaptop('@laptop.ProductID', '@laptop.Price')">
+                                    <i class="fas fa-shopping-cart"></i> 🛒 Buy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <script>
+        function buyLaptop(productId, productPrice) {
+            var card = $(event.target).closest('.card');
+            var countInput = card.find('.count-input');
+            var count = countInput.val();
+            var countInt = parseInt(count);
+            var availableCount = parseInt(card.find('.available-count').text().trim());
+
+            if (isNaN(countInt) || countInt <= 0 || countInt > availableCount) {
+                alert("Please enter a valid count within the available limit.");
+                return;
+            }
+
+            console.log("Buying product...");
+            console.log("Count value: " + count);
+            console.log("AVB count is : " + availableCount);
+
+            $.ajax({
+                type: "POST",
+                url: "/User/BuyLaptop/",
+                data: { productId: productId, productPrice: productPrice, count: count },
+                dataType: "json",
+                    //headers: { 'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() },
+                 
+                success: function (result) {
+                    if (result && result.success) {
+                        alert("Laptop sold successfully!");
+                    } else {
+                        alert("Failed to sell laptop: " + (result ? result.message : "Unknown error"));
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // console.error("AJAX Error:", status, error);
+                    // console.error("Response:", xhr.responseText);
+                    alert("An error occurred while selling the laptop.");
+                }
+            });
+        }
+    </script>
+</body>
