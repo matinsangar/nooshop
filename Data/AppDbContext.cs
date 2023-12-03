@@ -166,4 +166,16 @@ public class AppDbContext : DbContext
 
         return 0;
     }
+
+    public async Task<Laptop> getLaptopInfo(string name)
+    {
+        var laptop = await Laptops.FirstOrDefaultAsync(l => l.Name == name);
+        return laptop;
+    }
+
+    public async Task<SmartPhone> getPhoneInfo(string name)
+    {
+        var phone = await SmartPhones.FirstOrDefaultAsync(l => l.Name == name);
+        return phone;
+    }
 }
