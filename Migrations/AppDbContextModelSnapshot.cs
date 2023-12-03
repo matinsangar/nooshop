@@ -54,11 +54,8 @@ namespace nooshop.Migrations
 
             modelBuilder.Entity("nooshop.Models.Sell", b =>
                 {
-                    b.Property<int>("sellId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("sellId"));
+                    b.Property<string>("sellId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ClientName")
                         .IsRequired()
@@ -76,8 +73,9 @@ namespace nooshop.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShopName")
                         .IsRequired()
@@ -117,11 +115,8 @@ namespace nooshop.Migrations
 
             modelBuilder.Entity("nooshop.Models.SmartPhone", b =>
                 {
-                    b.Property<int>("ProductID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
+                    b.Property<string>("ProductID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("AvaiableCount")
                         .IsRequired()
@@ -151,14 +146,10 @@ namespace nooshop.Migrations
 
             modelBuilder.Entity("nooshop.Models.User", b =>
                 {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
-
-                    b.Property<double?>("Credit")
-                        .IsRequired()
+                    b.Property<double>("Credit")
                         .HasColumnType("float");
 
                     b.Property<string>("Email")

@@ -6,17 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace nooshop.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Laptop",
+                name: "Laptops",
                 columns: table => new
                 {
-                    ProductID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: true),
                     AvaiableCount = table.Column<int>(type: "int", nullable: false),
@@ -25,16 +24,15 @@ namespace nooshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Laptop", x => x.ProductID);
+                    table.PrimaryKey("PK_Laptops", x => x.ProductID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sell",
+                name: "Sells",
                 columns: table => new
                 {
-                    sellId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    sellId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProductID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
                     ShopName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -44,15 +42,14 @@ namespace nooshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sell", x => x.sellId);
+                    table.PrimaryKey("PK_Sells", x => x.sellId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Shop",
+                name: "Shops",
                 columns: table => new
                 {
-                    SellerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    sellerCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShopName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -60,15 +57,14 @@ namespace nooshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Shop", x => x.SellerId);
+                    table.PrimaryKey("PK_Shops", x => x.sellerCode);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SmartPhone",
+                name: "SmartPhones",
                 columns: table => new
                 {
-                    ProductID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     AvaiableCount = table.Column<int>(type: "int", nullable: false),
@@ -77,15 +73,14 @@ namespace nooshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SmartPhone", x => x.ProductID);
+                    table.PrimaryKey("PK_SmartPhones", x => x.ProductID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Credit = table.Column<double>(type: "float", nullable: false),
@@ -93,7 +88,7 @@ namespace nooshop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserID);
+                    table.PrimaryKey("PK_Users", x => x.UserID);
                 });
         }
 
@@ -101,19 +96,19 @@ namespace nooshop.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Laptop");
+                name: "Laptops");
 
             migrationBuilder.DropTable(
-                name: "Sell");
+                name: "Sells");
 
             migrationBuilder.DropTable(
-                name: "Shop");
+                name: "Shops");
 
             migrationBuilder.DropTable(
-                name: "SmartPhone");
+                name: "SmartPhones");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }
