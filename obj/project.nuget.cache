@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0psq5oGk69aIoVmmi28nSTH4DEkQ5sIFqw8jgYeKz56f3EoZyKS9vl2Xy2pVaLQKl9E+Bdjfd57Me44jH/3q9g==",
+  "dgSpecHash": "mmf1ez5QisV2MIwOhrAFiUovm2tI9Afd8/Ql5O58ha8YRLY46esR9ZBwUTnaA2cei7FCo/G6P2ov7ieInkFkTw==",
   "success": true,
   "projectFilePath": "/Users/macbookair/nooshop/nooshop/nooshop/nooshop.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/Users/macbookair/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
     "/Users/macbookair/.nuget/packages/entityframework/6.4.4/entityframework.6.4.4.nupkg.sha512",
     "/Users/macbookair/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/macbookair/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.14/microsoft.aspnetcore.authentication.jwtbearer.7.0.14.nupkg.sha512",
     "/Users/macbookair/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/Users/macbookair/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/Users/macbookair/.nuget/packages/microsoft.data.sqlclient/5.1.1/microsoft.data.sqlclient.5.1.1.nupkg.sha512",
