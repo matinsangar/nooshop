@@ -67,7 +67,7 @@ public class UserController : Controller
         {
             var claims = new[] { new Claim(ClaimTypes.Name, user.Username) };
             //savedName = user.Username;
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyNameIsMatin"));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyNameIsMatinMyNameIs2*%%%%Matisdsd898989nMyNameIsMatinMyNameIsMatin"));
             var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var expire = DateTime.Now.AddDays(1);
             var token = new JwtSecurityToken(
