@@ -38,4 +38,15 @@ public class ShopRepository : IShopRepository
     {
         return _appDbContext.Shops.FirstOrDefault(s => s.ShopName == shopName);
     }
+
+    public double? getShopCredit(string shopName)
+    {
+        var shop = _appDbContext.Shops.FirstOrDefault(s => s.ShopName == shopName);
+        if (shop != null)
+        {
+            return shop.TotalSell;
+        }
+
+        return 0;
+    }
 }

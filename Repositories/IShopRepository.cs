@@ -6,4 +6,5 @@ public interface IShopRepository
 {
     bool VerifyShopLogin(Shop shop);
     Shop? GetShopByName(string shopName);
+    double? getShopCredit(string shopName);
 }
