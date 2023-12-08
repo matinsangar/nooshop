@@ -116,25 +116,6 @@ public class AppDbContext : DbContext
             .IsRequired();
     }
 
-    public async Task<bool> VerifyShopLogin(Shop shop)
-    {
-        try
-        {
-            var getShop = await Shops.FirstOrDefaultAsync(s => s.ShopName == shop.ShopName);
-            if (getShop != null && shop.Password == getShop.Password)
-            {
-                return true;
-            }
-
-            Console.WriteLine("Wrong information for shoop login...");
-            return false;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
 
     public async Task<bool> VerifyUserLogin(User user)
     {

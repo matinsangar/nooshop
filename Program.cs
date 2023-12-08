@@ -11,6 +11,7 @@ using nooshop.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using nooshop.Repositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "YourAuthCookieName"; 
         
     });
+
+
+//Repos
+builder.Services.AddScoped<IShopRepository, ShopRepository>();
+builder.Services.AddEndpointsApiExplorer();
+
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 builder.Services.AddDbContext<AppDbContext>(options =>

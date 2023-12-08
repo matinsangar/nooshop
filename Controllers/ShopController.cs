@@ -3,6 +3,7 @@ using System.Data.Entity;
 using nooshop.Models;
 using nooshop.Data;
 using nooshop.Controllers;
+using nooshop.Repositories;
 
 namespace nooshop.Controllers;
 
@@ -10,11 +11,13 @@ public class ShopController : Controller
 {
     private readonly ILogger<ShopController> _logger;
     private readonly AppDbContext _DbContext;
+    private readonly IShopRepository _shopRepository;
 
-    public ShopController(AppDbContext dbContext, ILogger<ShopController> logger)
+    public ShopController(AppDbContext dbContext, ILogger<ShopController> logger, IShopRepository _ShopRepository)
     {
         _DbContext = dbContext;
         _logger = logger;
+        _shopRepository = _ShopRepository;
     }
 
     public IActionResult shopSignUp()
@@ -51,7 +54,8 @@ public class ShopController : Controller
     [HttpPost]
     public async Task<IActionResult> shopLogin(Shop shop)
     {
-        var isLoginValid = await _DbContext.VerifyShopLogin(shop);
+        var isLoginValid = _shopRepository.VerifyShopLogin(shop);
+        ;
         if (isLoginValid)
         {
             return View("ShopPanel");
