@@ -2,7 +2,7 @@ namespace nooshop.Models;
 
 public class Sell
 {
-    public Sell(string productId, double price, int count, string shopName, string clientName, bool isValid,
+    public Sell(string productId, double price, int count, string shopName, string? clientName, bool isValid,
         string sellId,
         DateTime dateTime)
     {
@@ -31,7 +31,7 @@ public class Sell
     public double Price { get; set; }
     public int Count { get; set; } = 0;
     public string ShopName { get; set; }
-    public string ClientName { get; set; }
+    public string? ClientName { get; set; }
     public bool IsValid { get; set; } = false;
 
     public string sellId { get; set; }

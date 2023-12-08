@@ -22,12 +22,15 @@ public class UserController : Controller
     private readonly ILogger<UserController> _logger;
     private readonly AppDbContext _DbContext;
     private readonly IUserRepository _userRepository;
+    private readonly ISellRepository _sellRepository;
 
-    public UserController(AppDbContext dbContext, ILogger<UserController> logger, IUserRepository userRepository)
+    public UserController(AppDbContext dbContext, ILogger<UserController> logger, IUserRepository userRepository,
+        ISellRepository _SellRepository)
     {
         _DbContext = dbContext;
         _logger = logger;
         _userRepository = userRepository;
+        _sellRepository = _SellRepository;
     }
 
     public IActionResult UserSignUp()
@@ -108,7 +111,6 @@ public class UserController : Controller
     [Authorize]
     public async Task<IActionResult> UserPanel()
     {
-
         string username = User.Identity.Name;
         var userCredit = _userRepository.getUserCredit(username);
         Console.WriteLine($"The UserName is: {username}");
@@ -118,115 +120,95 @@ public class UserController : Controller
         };
         return View(viewModel);
     }
+    //
+    // [HttpPost]
+    // public IActionResult BuyLaptop(string productId, double productPrice, int count)
+    // {
+    //     try
+    //     {
+    //         string userName = User.Identity.Name;
+    //         Console.WriteLine($"The name is {userName}");
+    //         Console.WriteLine(
+    //             $"Received BuyLaptop request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");
+    //
+    //         var laptop = _DbContext.Laptops.FirstOrDefault(l => l.ProductID == productId);
+    //
+    //         if (laptop != null && laptop.AvaiableCount >= count)
+    //         {
+    //             var sell = new Sell
+    //             {
+    //                 ProductID = productId,
+    //                 Price = productPrice,
+    //                 Count = count,
+    //                 ShopName = laptop.ShopProvider,
+    //                 ClientName = userName,
+    //                 IsValid = true,
+    //                 sellId = Guid.NewGuid().ToString(),
+    //                 DateTime = DateTime.Now
+    //             };
+    //
+    //             _sellRepository.AddSell(new Sell
+    //             {
+    //                 ProductID = productId,
+    //                 Price = productPrice,
+    //                 Count = count,
+    //                 ShopName = laptop.ShopProvider,
+    //                 ClientName = userName,
+    //                 IsValid = true,
+    //                 sellId = Guid.NewGuid().ToString(),
+    //                 DateTime = DateTime.Now
+    //             });
+    //             _DbContext.SaveChanges();
+    //
+    //             var provider = _DbContext.Shops.FirstOrDefault(p => p.sellerCode == laptop.ShopProvider);
+    //             if (provider != null)
+    //             {
+    //                 provider.TotalSell += count * productPrice;
+    //                 _DbContext.SaveChanges();
+    //             }
+    //
+    //             var client = _DbContext.Users.FirstOrDefault(p => p.Username == userName);
+    //             if (client != null)
+    //             {
+    //                 client.Credit -= count * productPrice;
+    //                 _DbContext.SaveChanges();
+    //             }
+    //
+    //             laptop.AvaiableCount -= count;
+    //             _DbContext.SaveChanges();
+    //
+    //             return Json(new { success = true });
+    //         }
+    //
+    //         return Json(new
+    //         {
+    //             success = false,
+    //             message = "Failed to complete the sale. The laptop is not available or the count is invalid."
+    //         });
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         _logger.LogError($"Error in BuyLaptop: {ex.Message}");
+    //         return BadRequest($"An error occurred while processing the sale: {ex.Message}");
+    //     }
+    // }
+    //
 
+    
     [HttpPost]
-    public IActionResult BuyLaptop(string productId, double productPrice, int count)
+    public async Task<IActionResult> BuyPhone(string productId, double productPrice, int count)
     {
         try
         {
-            string userName = User.Identity.Name;
-            Console.WriteLine($"The name is {userName}");
-            Console.WriteLine(
-                $"Received BuyLaptop request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");
+            string? userName = User.Identity?.Name;
 
-            var laptop = _DbContext.Laptops.FirstOrDefault(l => l.ProductID == productId);
-
-            if (laptop != null && laptop.AvaiableCount >= count)
+            if (!string.IsNullOrEmpty(userName))
             {
-                var sell = new Sell
-                {
-                    ProductID = productId,
-                    Price = productPrice,
-                    Count = count,
-                    ShopName = laptop.ShopProvider,
-                    ClientName = userName,
-                    IsValid = true,
-                    sellId = Guid.NewGuid().ToString(),
-                    DateTime = DateTime.Now
-                };
+                Console.WriteLine($"The name is {userName}");
+                Console.WriteLine(
+                    $"Received BuyPhone request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");
 
-                _DbContext.Sells.Add(sell);
-                _DbContext.SaveChanges();
-
-                var provider = _DbContext.Shops.FirstOrDefault(p => p.sellerCode == laptop.ShopProvider);
-                if (provider != null)
-                {
-                    provider.TotalSell += count * productPrice;
-                    _DbContext.SaveChanges();
-                }
-
-                var client = _DbContext.Users.FirstOrDefault(p => p.Username == userName);
-                if (client != null)
-                {
-                    client.Credit -= count * productPrice;
-                    _DbContext.SaveChanges();
-                }
-
-                laptop.AvaiableCount -= count;
-                _DbContext.SaveChanges();
-
-                return Json(new { success = true });
-            }
-
-            return Json(new
-            {
-                success = false,
-                message = "Failed to complete the sale. The laptop is not available or the count is invalid."
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Error in BuyLaptop: {ex.Message}");
-            return BadRequest($"An error occurred while processing the sale: {ex.Message}");
-        }
-    }
-
-
-    [HttpPost]
-    public IActionResult BuyPhone(string productId, double productPrice, int count)
-    {
-        try
-        {
-            string userName = User.Identity.Name;
-            Console.WriteLine($"The name is {userName}");
-            Console.WriteLine(
-                $"Received BuyLaptop request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");
-
-            var smartPhone = _DbContext.SmartPhones.FirstOrDefault(l => l.ProductID == productId);
-
-            if (smartPhone != null && smartPhone.AvaiableCount >= count)
-            {
-                var sell = new Sell
-                {
-                    ProductID = productId,
-                    Price = productPrice,
-                    Count = count,
-                    ShopName = smartPhone.ShopProvider,
-                    ClientName = userName,
-                    IsValid = true,
-                    sellId = Guid.NewGuid().ToString(),
-                    DateTime = DateTime.Now
-                };
-
-                _DbContext.Sells.Add(sell);
-                _DbContext.SaveChanges();
-
-                var provider = _DbContext.Shops.FirstOrDefault(p => p.sellerCode == smartPhone.ShopProvider);
-                if (provider != null)
-                {
-                    provider.TotalSell += count * productPrice;
-                    _DbContext.SaveChanges();
-                }
-
-                var client = _DbContext.Users.FirstOrDefault(p => p.Username == userName);
-                if (client != null)
-                {
-                    client.Credit -= count * productPrice;
-                    _DbContext.SaveChanges();
-                }
-
-                smartPhone.AvaiableCount -= count;
-                _DbContext.SaveChanges();
+                _sellRepository.BuyPhoneAsync(productId, productPrice, count, userName);
 
                 return Json(new { success = true });
             }
@@ -239,8 +221,39 @@ public class UserController : Controller
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error in BuyPhone: {ex.Message}");
-            return BadRequest($"An error occurred while processing the sale: {ex.Message}");
+            _logger.LogError(ex, "Error in BuyPhone");
+            return BadRequest(new { error = "An error occurred while processing the sale.", details = ex.Message });
+        }
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> BuyLaptop(string productId, double productPrice, int count)
+    {
+        try
+        {
+            string? userName = User.Identity?.Name;
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                Console.WriteLine($"The name is {userName}");
+                Console.WriteLine(
+                    $"Received BuyPhone request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");
+
+                _sellRepository.BuyLaptopAsync(productId, productPrice, count, userName);
+
+                return Json(new { success = true });
+            }
+
+            return Json(new
+            {
+                success = false,
+                message = "Failed to complete the sale. The phone is not available or the count is invalid."
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error in BuyPhone");
+            return BadRequest(new { error = "An error occurred while processing the sale.", details = ex.Message });
         }
     }
 }
