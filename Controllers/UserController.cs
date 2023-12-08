@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
+using nooshop.Repositories;
 
 namespace nooshop.Controllers;
 
@@ -20,12 +21,13 @@ public class UserController : Controller
 {
     private readonly ILogger<UserController> _logger;
     private readonly AppDbContext _DbContext;
-    private static string savedName;
+    private readonly IUserRepository _userRepository;
 
-    public UserController(AppDbContext dbContext, ILogger<UserController> logger)
+    public UserController(AppDbContext dbContext, ILogger<UserController> logger, IUserRepository userRepository)
     {
         _DbContext = dbContext;
         _logger = logger;
+        _userRepository = userRepository;
     }
 
     public IActionResult UserSignUp()
@@ -62,12 +64,12 @@ public class UserController : Controller
     [HttpPost]
     public async Task<IActionResult> userLogin(User user)
     {
-        var isLoginValid = await _DbContext.VerifyUserLogin(user);
+        var isLoginValid = _userRepository.VerifyUserLogin(user);
         if (isLoginValid)
         {
             var claims = new[] { new Claim(ClaimTypes.Name, user.Username) };
-            //savedName = user.Username;
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MyNameIsMatinMyNameIs2*%%%%Matisdsd898989nMyNameIsMatinMyNameIsMatin"));
+            var secretKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes("MyNameIsMatinMyNameIs2*%%%%Matisdsd898989nMyNameIsMatinMyNameIsMatin"));
             var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
             var expire = DateTime.Now.AddDays(1);
             var token = new JwtSecurityToken(
@@ -106,8 +108,9 @@ public class UserController : Controller
     [Authorize]
     public async Task<IActionResult> UserPanel()
     {
-        var userCredit = await _DbContext.getUserCredit(savedName);
-        var username = User.Identity.Name;
+
+        string username = User.Identity.Name;
+        var userCredit = _userRepository.getUserCredit(username);
         Console.WriteLine($"The UserName is: {username}");
         var viewModel = new UserPanelViewModel
         {
@@ -121,7 +124,7 @@ public class UserController : Controller
     {
         try
         {
-            string userName = savedName;
+            string userName = User.Identity.Name;
             Console.WriteLine($"The name is {userName}");
             Console.WriteLine(
                 $"Received BuyLaptop request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");
@@ -184,7 +187,7 @@ public class UserController : Controller
     {
         try
         {
-            string userName = savedName;
+            string userName = User.Identity.Name;
             Console.WriteLine($"The name is {userName}");
             Console.WriteLine(
                 $"Received BuyLaptop request - ProductId: {productId}, ProductPrice: {productPrice}, Count: {count}");

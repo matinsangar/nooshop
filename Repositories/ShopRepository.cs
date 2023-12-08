@@ -34,8 +34,8 @@ public class ShopRepository : IShopRepository
         }
     }
 
-    public async Task<Shop> GetShopByNameAsync(string shopName)
+    public Shop? GetShopByName(string shopName)
     {
-        return await _appDbContext.Shops.FirstOrDefaultAsync(s => s.ShopName == shopName);
+        return _appDbContext.Shops.FirstOrDefault(s => s.ShopName == shopName);
     }
 }
