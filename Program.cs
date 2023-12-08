@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 
-//Repos
+//Repositories
 builder.Services.AddScoped<IShopRepository, ShopRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
