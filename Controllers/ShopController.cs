@@ -4,7 +4,6 @@ using nooshop.Models;
 using nooshop.Data;
 using nooshop.Controllers;
 using nooshop.Repositories;
-
 using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity;
@@ -21,7 +20,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using nooshop.Repositories;
-
+using nooshop.Views.Shop;
 
 
 namespace nooshop.Controllers;
@@ -101,8 +100,7 @@ public class ShopController : Controller
                 });
 
 
-            return View("ShopPanel");
-
+            return RedirectToAction("ShopPanel","Shop");
         }
 
         return RedirectToAction("shopLogin");
@@ -117,5 +115,19 @@ public class ShopController : Controller
     public IActionResult ShopLoginSuccess()
     {
         return View();
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ShopPanel()
+    {
+        string shopName = User.Identity.Name;
+        var shopCredit = _shopRepository.getShopCredit(shopName);
+        Console.WriteLine($"The ShopName is: {shopName}");
+        var viewModel = new ShopPanelViewModel
+        {
+            Credit = shopCredit
+        };
+        return View(viewModel);
     }
 }
